@@ -125,7 +125,7 @@ Here's what you should strive for:
 
 > Where should I send back the result when I'm done?
 
-Fork this repo and the hiring manager an email when you think you are done. There is no deadline for this task unless otherwise noted to you directly.
+Fork this repo and share the repo with the hiring manager via email when you think you are done. There is no deadline for this task unless otherwise noted to you directly.
 
 > What if I have a question?
 
