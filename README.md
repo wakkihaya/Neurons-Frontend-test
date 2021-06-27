@@ -8,7 +8,7 @@ Use React w/ TypeScript to implement the following mock-up. You will need to lev
 Use this Figma file to see the Product UX/Design guidelines, you are welcome to improve the design experience as you see fit. 
 
 > [Source Figma file](https://www.figma.com/file/F6LUtupkwm21hrLLza4A5n/TV-Shows?node-id=0%3A1)
-> 
+![Pipedpiper-front-end-test-mockup](./piped_piper_app.png)
 
 Nb! Some screens are not designed but there are inspirations for implementation, part of the test is to see your approach to the more unknown. 
 
