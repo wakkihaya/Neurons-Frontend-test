@@ -121,6 +121,14 @@ Here's what you should strive for:
 - Extensible code
 - Thorough explanation of decisions and tradeoffs
 
+## Questionnaire
+- Please fill out this questionnaire and commit your answers to the repo 
+- What is your preferred reactjs stack today for building a modern SaaS application? What libraries and frameworks would be incl. And why? 
+- How would you approach an application where multiple products and multiple teams working across the application? 
+- Design / UI Component system, How would you deal with that? Build one, use a framework (e.g Ant, Materiale UI etc. ) and why your approach? 
+- How to ensure good quality and high performance code? 
+- Why is testing important, how would you embed it in a team and with what tools? 
+
 ## Q&A
 
 > Where should I send back the result when I'm done?
