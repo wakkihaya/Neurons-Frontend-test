@@ -63,8 +63,8 @@ Detail Cards(Episodes)
  - Cast : Name or Character name 
  - Episode: Name of the show or part of the description of the show. 
 - Under each pages you can filter the list of content  
-- Each page has options of filters e.g Country that can be dynamic created based on content. 
-- Filtering options should be saved in the session as well as when I return to the application. 
+- Each page has options of filters e.g Country that may be dynamic created based on content, but not required.
+- Filtering options should be saved in the session as well as when I return to the application. _(optional)_ 
 - All data should come from Realtime API 
 
 
@@ -73,33 +73,18 @@ Detail Cards(Episodes)
 
 - TypeScript oriented (JavaScipt can be used, but we strongly prefer TypeScript)
   - Use **React**
-  - _Do not_ use any React boilerplate, such as Create React App
-- Feel free to use a preprocessor, CSS-in-JS, or JSS tool but _do not_ use any pre-styled frameworks or libraries
-  - The general rule of thumb is: you should write your own styling for your components, do not use "pre-made" tools and utilities
-
-  - There are a few reasons we do this:
-    - we care about pixel perfect implementation
+  - We encorage you not to use any React boilerplate, such as Create React App, but you can definitely do it if it will save you some time.
+- Feel free to use a preprocessor, CSS-in-JS, or JSS tool. Additionally, you can use any existing UI library in the market such as Ant Design or Material UI. There are a few considerations that apply to this:
+    - try to design your components while having on mind that they will be consumed and mantained by other developers later on. 
     - we want to see your understanding of CSS and styling practices
-    - we want to see your understanding Design/UI/Components skills 
+    - we allow leveraging UI libraries to help you code faster, but we do expect some component design practice. 
 
-  - USE:
-    - Styled-Components
-    - Emotion
-    - SCSS
-    - SASS
-    - LESS
-    - CSS
-
-  - AVOID:
-    - Tailwind
-    - Bootstrap
-    - Material UI
-    - Semantic UI
-
-Not that we are against these frameworks but more that we can see how you would build these components yourself. 
-
+### State management
+Feel free to use any state management strategy you'd like. While Redux is the most widely known approach to this, we do understand it requires some boilerplate. We'd like you to be pragmatic while thinking on maintainability of the code which doesn't necessarily translate into a specific library or tool.
 
 ### Bonus
+
+The following are nice-to-have features.
 
 - Make the application accessible
 - Write clear **documentation** on how the app was designed and how to run the code
@@ -112,7 +97,9 @@ Not that we are against these frameworks but more that we can see how you would 
 - Describe improvement opportunities when you conclude
 
 ## What We Care About
-Use any libraries that you would normally use if this were a real production App. Be prepared to justify those choices. Please note: _we care more about how you approach the problem than the end result. Code cleanliness and design are more important than using the "right" library._
+Use any libraries that you would normally use if this were a real production App. Be prepared to justify those choices. 
+
+**Please note: we care more about how you approach the problem than the end result. Code cleanliness and design are more important than using the "right" library.**
 
 Here's what you should strive for:
 
@@ -123,7 +110,7 @@ Here's what you should strive for:
 
 ## Questionnaire
 Please fill out this questionnaire and commit your answers to the repo 
-- What is your preferred reactjs stack today for building a modern SaaS application? What libraries and frameworks would be incl. And why? 
+- What is your preferred ReactJS stack today for building a modern SaaS application? What libraries and frameworks would be incl. And why? 
 - How would you approach an application where multiple products and multiple teams working across the application? 
 - Design / UI Component system, How would you deal with that? Build one, use a framework (e.g Ant, Materiale UI etc. ) and why your approach? 
 - How to ensure good quality and high performance code? 
