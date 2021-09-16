@@ -21,8 +21,11 @@
     "build": "npx parcel build --public-url ./ src/index.html"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "2.0.0-rc.0",
     "parcel": "^2.0.0-rc.0",
-    "parcel-reporter-static-files-copy": "^1.3.0"
+    "parcel-plugin-typescript": "^1.0.0",
+    "parcel-reporter-static-files-copy": "^1.3.0",
+    "sass": "^1.41.0"
   },
   "externals": {
     "/images/**/*": false
