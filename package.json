@@ -21,7 +21,9 @@
     "start": "npx parcel src/index.html --open",
     "build": "npx parcel build --public-url ./ src/index.html",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test": "react-scripts test",
+    "//": "TODO:// use jest for test, instead"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.0.0-rc.0",
