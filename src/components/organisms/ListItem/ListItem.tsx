@@ -4,6 +4,7 @@ import type { FC, ReactNode, MouseEventHandler } from 'react'
 import { Image } from '../../atoms'
 import styles from './ListItem.module.scss'
 import { CastModel } from '~models/CastModel'
+import faceIcon from '../../../assets/images/face.png'
 
 export type ListItemProps = {
   className?: string
@@ -16,14 +17,14 @@ export const ListItem: FC<ListItemProps> = (props) => {
   return (
     <div className={clsx(styles.listItem, className)}>
       <div className={styles.listItem_Card}>
+        {/* TODO: fix a bug to show the image from external */}
         <Image
           src={castInfo.imageSrc}
           alt={castInfo.character}
           className={styles.listItem_Card_Image}
         />
-        {/* TODO: change the image size */}
         <Image
-          src="~/assets/images/face.png"
+          src={faceIcon}
           alt="PiedPiper face"
           className={styles.listItem_Card_Icon}
         />
