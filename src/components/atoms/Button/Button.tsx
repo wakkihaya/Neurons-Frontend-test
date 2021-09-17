@@ -1,7 +1,6 @@
 import type { FC, ReactNode, MouseEventHandler } from 'react'
 import clsx from 'clsx'
 import styles from './Button.scss'
-import React from 'react'
 
 export const ButtonTheme = {
   DEFAULT: 'default',
