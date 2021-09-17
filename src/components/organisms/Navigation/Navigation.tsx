@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import type { FC, ReactNode, MouseEventHandler } from 'react'
 import styles from './Navigation.scss'
 import { Button } from '~/components/atoms/'
+import { Image } from '~/components/atoms'
 
 export type NavigationProps = {
   children1: ReactNode
@@ -27,7 +28,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   return (
     <div className={clsx(styles.navigation, className)}>
-      <img src="~/assets/images/Logo.png" className={styles.img} />
+      <Image src="~/assets/images/Logo.png" className={styles.img} />
       <Button
         onClick={onClickButton1}
         theme={themeButton1}
