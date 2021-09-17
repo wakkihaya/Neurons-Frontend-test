@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  width: 210px;
+  height: 34px;
+  margin: 0 1em;
+}
+
+.img {
+  width: 110px;
+  margin-right: 2em;
+}
