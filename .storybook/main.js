@@ -28,6 +28,10 @@ module.exports = {
       include: path.resolve(__dirname, '../'),
     })
     config.resolve.extensions.push('.ts', '.tsx')
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '~': path.resolve(__dirname, '../src'),
+    }
     return config
   },
 }
