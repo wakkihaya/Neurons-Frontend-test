@@ -20,10 +20,10 @@ const mockCastData: CastModel = {
   birthday: '2000-0-0',
   character: 'Richard',
   charLink: 'https://neuronsinc.com',
+  imageSrc:
+    'https://static.tvmaze.com/uploads/images/medium_portrait/49/123646.jpg',
 }
 
 _ListItem.args = {
-  src:
-    'https://pbs.twimg.com/profile_images/1425033841195077633/xb98yWU6_400x400.jpg',
   castInfo: mockCastData,
 }

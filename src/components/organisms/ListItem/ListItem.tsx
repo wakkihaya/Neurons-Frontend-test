@@ -7,18 +7,20 @@ import { CastModel } from '~models/CastModel'
 
 export type ListItemProps = {
   className?: string
-  src: string
-  alt?: string
   castInfo: CastModel
 }
 
 export const ListItem: FC<ListItemProps> = (props) => {
-  const { className, src, alt, castInfo } = props
+  const { className, castInfo } = props
 
   return (
     <div className={clsx(styles.listItem, className)}>
       <div className={styles.listItem_Card}>
-        <Image src={src} alt={alt} className={styles.listItem_Card_Image} />
+        <Image
+          src={castInfo.imageSrc}
+          alt={castInfo.character}
+          className={styles.listItem_Card_Image}
+        />
         <Image
           src="~/assets/images/face.png"
           alt="PiedPiper face"
