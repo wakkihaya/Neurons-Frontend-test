@@ -1,8 +1,8 @@
 import React from 'react'
 import clsx from 'clsx'
 import type { FC, ReactNode, MouseEventHandler } from 'react'
-import { Image } from '~/components/atoms'
-import styles from './ListItem.scss'
+import { Image } from '../../atoms'
+import styles from './ListItem.module.scss'
 import { CastModel } from '~models/CastModel'
 
 export type ListItemProps = {
@@ -21,6 +21,7 @@ export const ListItem: FC<ListItemProps> = (props) => {
           alt={castInfo.character}
           className={styles.listItem_Card_Image}
         />
+        {/* TODO: change the image size */}
         <Image
           src="~/assets/images/face.png"
           alt="PiedPiper face"

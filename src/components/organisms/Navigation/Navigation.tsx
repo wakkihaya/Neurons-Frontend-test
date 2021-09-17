@@ -1,9 +1,9 @@
 import React from 'react'
 import clsx from 'clsx'
 import type { FC, ReactNode, MouseEventHandler } from 'react'
-import styles from './Navigation.scss'
-import { Button } from '~/components/atoms/'
-import { Image } from '~/components/atoms'
+import styles from './Navigation.module.scss'
+import { Button } from '../../atoms/'
+import { Image } from '../../atoms'
 
 export type NavigationProps = {
   children1: ReactNode
