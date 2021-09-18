@@ -37,10 +37,11 @@ export const useCast = (
           const birthday = item['person']['birthday'] ?? 'None'
           return {
             name: item['person']['name'] ?? 'None',
+            profileLink: item['person']['url'],
             age: calculateAge(birthday) ?? 'None',
-            country: item['person']['country']['name'],
-            birthday: birthday,
-            character: item['character']['name'],
+            country: item['person']['country']['name'] ?? 'None',
+            birthday: birthday ?? 'None',
+            character: item['character']['name'] ?? 'None',
             charLink: item['character']['url'],
             imageSrc: item['person']['image']['medium'],
           } as CastModel

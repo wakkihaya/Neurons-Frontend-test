@@ -28,7 +28,9 @@ export const CastListItem: FC<CastListItemProps> = (props) => {
           className={styles.listItem_Card_Icon}
         />
         <div className={styles.listItem_Card_MainUserInfo}>
-          {castInfo.name}, {castInfo.age}
+          <a href={castInfo.profileLink} target="_blank">
+            {castInfo.name}, {castInfo.age}{' '}
+          </a>
         </div>
       </div>
       <div className={styles.listItem_OtherInfo}>
@@ -38,7 +40,9 @@ export const CastListItem: FC<CastListItemProps> = (props) => {
         </p>
         <p>
           Character:
-          <a href={castInfo.charLink}>{castInfo.character}</a>
+          <a href={castInfo.charLink} target="_blank">
+            {castInfo.character}
+          </a>
         </p>
       </div>
     </div>
