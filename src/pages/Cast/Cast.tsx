@@ -71,7 +71,7 @@ const Cast: FC = () => {
 
   return (
     <>
-      <div className={styles.castContainer}>
+      <div className={styles['castContainer']}>
         <Navigation
           children1="Cast"
           children2="Episodes"
@@ -79,12 +79,11 @@ const Cast: FC = () => {
           onClickButton2={onClickEpisodesButton}
           themeButton1={ButtonTheme.SELECTED}
           themeButton2={ButtonTheme.DEFAULT}
-          className={clsx(styles.navigation)}
         />
         <SearchBar
           placeholder="Search for cast members"
           onChange={onChangeSearch}
-          className={styles.searchBar}
+          className={styles['castContainer--searchBar']}
         />
         {loading === 'DONE' ? (
           <>{renderCastList(castInfo, filteredCastInfo, searchWord)}</>

@@ -14,21 +14,21 @@ export const EpisodeListItem: FC<EpisodeListItemProps> = (props) => {
   const { className, episodeInfo } = props
 
   return (
-    <div className={clsx(styles.listItem, className)}>
-      <div className={styles.listItem_Card}>
+    <div className={clsx(styles['listItem'], className)}>
+      <div className={styles['listItem--card']}>
         <Image
           src={episodeInfo.imageSrc}
           alt={episodeInfo.name}
-          className={styles.listItem_Card_Image}
+          className={styles['listItem--card-image']}
         />
-        <div className={styles.listItem_Card_MainUserInfo}>
+        <div className={styles['listItem--card-mainUserInfo']}>
           <a href={episodeInfo.url} target="_blank">
             "{episodeInfo.name}"
           </a>
           ,{episodeInfo.season_episode}, ({episodeInfo.airTime})
         </div>
       </div>
-      <div className={styles.listItem_OtherInfo}>
+      <div className={styles['listItem--otherInfo']}>
         <p>{episodeInfo.description}</p>
       </div>
     </div>

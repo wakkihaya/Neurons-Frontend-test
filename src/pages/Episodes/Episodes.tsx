@@ -73,7 +73,7 @@ const Episodes: FC = () => {
 
   return (
     <>
-      <div className={styles.episodesContainer}>
+      <div className={styles['episodesContainer']}>
         <Navigation
           children1="Cast"
           children2="Episodes"
@@ -81,12 +81,11 @@ const Episodes: FC = () => {
           onClickButton2={onClickEpisodesButton}
           themeButton1={ButtonTheme.DEFAULT}
           themeButton2={ButtonTheme.SELECTED}
-          className={clsx(styles.navigation)}
         />
         <SearchBar
           placeholder="Search for episodes"
           onChange={onChangeSearch}
-          className={styles.searchBar}
+          className={styles['episodesContainer--searchBar']}
         />
         {loading === 'DONE' ? (
           <>{renderEpisodeList(episodeInfo, filteredEpisodeInfo, searchWord)}</>
