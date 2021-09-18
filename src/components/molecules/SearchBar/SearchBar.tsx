@@ -15,12 +15,12 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
   const { placeholder, onChange, className } = props
 
   return (
-    <div className={clsx(styles.searchBar, className)}>
-      <AiOutlineSearch className={styles.searchIcon} />
+    <div className={clsx(styles['searchBar'], className)}>
+      <AiOutlineSearch className={styles['searchBar--icon']} />
       <Input
         placeholder={placeholder}
         onChange={onChange}
-        className={styles.input}
+        className={styles['searchBar--input']}
       />
     </div>
   )

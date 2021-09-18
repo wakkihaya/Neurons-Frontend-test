@@ -28,19 +28,19 @@ export const Navigation: FC<NavigationProps> = (props) => {
   } = props
 
   return (
-    <div className={clsx(styles.navigation, className)}>
-      <Image src={logo} className={styles.img} />
+    <div className={clsx(styles['navigation'], className)}>
+      <Image src={logo} className={styles['navigation--image']} />
       <Button
         onClick={onClickButton1}
         theme={themeButton1}
-        className={styles.button}
+        className={styles['navigation--button']}
       >
         {children1}
       </Button>
       <Button
         onClick={onClickButton2}
         theme={themeButton2}
-        className={styles.button}
+        className={styles['navigation--button']}
       >
         {children2}
       </Button>

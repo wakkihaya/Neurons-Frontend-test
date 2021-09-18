@@ -6,14 +6,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.searchIcon {
-  width: 17px;
-  height: 17px;
-  padding-left: 1em;
-}
-
-.input {
-  width: 100%;
+  &--icon {
+    width: 17px;
+    height: 17px;
+    padding-left: 1em;
+  }
+  &--input {
+    width: 100%;
+  }
 }

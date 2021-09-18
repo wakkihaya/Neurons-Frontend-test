@@ -4,15 +4,13 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-}
-
-.button {
-  width: 210px;
-  height: 34px;
-  margin: 0 1em;
-}
-
-.img {
-  width: 110px;
-  margin-right: 2em;
+  &--image {
+    width: 110px;
+    margin-right: 2em;
+  }
+  &--button {
+    width: 210px;
+    height: 34px;
+    margin: 0 1em;
+  }
 }

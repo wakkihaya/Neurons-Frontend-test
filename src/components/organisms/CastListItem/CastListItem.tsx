@@ -15,25 +15,25 @@ export const CastListItem: FC<CastListItemProps> = (props) => {
   const { className, castInfo } = props
 
   return (
-    <div className={clsx(styles.listItem, className)}>
-      <div className={styles.listItem_Card}>
+    <div className={clsx(styles['listItem'], className)}>
+      <div className={styles['listItem--card']}>
         <Image
           src={castInfo.imageSrc}
           alt={castInfo.character}
-          className={styles.listItem_Card_Image}
+          className={styles['listItem--card-image']}
         />
         <Image
           src={faceIcon}
           alt="PiedPiper face"
-          className={styles.listItem_Card_Icon}
+          className={styles['listItem--card-icon']}
         />
-        <div className={styles.listItem_Card_MainUserInfo}>
+        <div className={styles['listItem--card-mainUserInfo']}>
           <a href={castInfo.profileLink} target="_blank">
-            {castInfo.name}, {castInfo.age}{' '}
+            {castInfo.name}, {castInfo.age}
           </a>
         </div>
       </div>
-      <div className={styles.listItem_OtherInfo}>
+      <div className={styles['listItem--otherInfo']}>
         <p>
           Country: {castInfo.country} <br />
           Birthday: {castInfo.birthday}

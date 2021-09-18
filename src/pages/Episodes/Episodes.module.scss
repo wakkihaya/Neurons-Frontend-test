@@ -1,10 +1,9 @@
 .episodesContainer {
   margin: 3em;
-}
-
-.searchBar {
-  width: 700px;
-  margin: 2em 0;
+  &--searchBar {
+    width: 700px;
+    margin: 2em 0;
+  }
 }
 
 .listItem {
