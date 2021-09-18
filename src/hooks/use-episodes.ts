@@ -29,10 +29,11 @@ export const useEpisodes = (
         const formattedEpisodeDataList = episodeDataList.map((item: any) => {
           return {
             imageSrc: item['image']['medium'],
-            name: item['name'], //TODO: link til tvmaze??
+            name: item['name'],
             description: removeUnneedPTag(item['summary']),
             season_episode: `${item['season']} / ${item['number']}`,
             airTime: item['airtime'],
+            url: item['url'],
           } as EpisodeModel
         })
         setEpisodeInfo(formattedEpisodeDataList)

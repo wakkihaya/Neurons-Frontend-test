@@ -4,4 +4,5 @@ export type EpisodeModel = {
   description: string
   season_episode: string
   airTime: string | number
+  url: string
 }

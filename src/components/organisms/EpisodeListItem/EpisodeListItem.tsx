@@ -22,8 +22,10 @@ export const EpisodeListItem: FC<EpisodeListItemProps> = (props) => {
           className={styles.listItem_Card_Image}
         />
         <div className={styles.listItem_Card_MainUserInfo}>
-          "{episodeInfo.name}", {episodeInfo.season_episode}, (
-          {episodeInfo.airTime})
+          <a href={episodeInfo.url} target="_blank">
+            "{episodeInfo.name}"
+          </a>
+          ,{episodeInfo.season_episode}, ({episodeInfo.airTime})
         </div>
       </div>
       <div className={styles.listItem_OtherInfo}>
