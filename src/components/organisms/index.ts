@@ -1,3 +1,3 @@
 export { Navigation } from './Navigation'
-export { ListItem } from './ListItem'
+export { CastListItem } from './CastListItem'
 export { EpisodeListItem } from './EpisodeListItem'
