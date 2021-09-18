@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { LoadingStatusType } from '~pages/Cast/Cast'
 import { CastModel } from '~models/CastModel'
 
 //Param: {birthday: '1982-03-10'} Return: string(e.g. '23')
@@ -16,11 +16,14 @@ const calculateAge = (birthday: string) => {
   return currentAge.toString()
 }
 
-export const useCast = () => {
+export const useCast = (
+  setLoading: Dispatch<SetStateAction<LoadingStatusType>>
+) => {
   const [castInfo, setCastInfo] = useState<CastModel[]>()
 
   useEffect(() => {
     const fetchCastByApi = async () => {
+      setLoading('LOADING')
       try {
         const res = await axios.get(
           'https://api.tvmaze.com/shows/143?embed=cast'
@@ -46,6 +49,7 @@ export const useCast = () => {
         console.error(error)
         return
       }
+      setLoading('DONE')
     }
     fetchCastByApi()
   }, [])

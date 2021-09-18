@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { useState } from 'react'
 import clsx from 'clsx'
 import { Navigation } from '../../components/organisms'
 import { ListItem } from '../../components/organisms/ListItem'
@@ -8,11 +9,11 @@ import { useCast } from '../../hooks/use-cast'
 import styles from './Cast.module.scss'
 //TODO: resolve paths error
 
-//TODO: show loading icon.
+export type LoadingStatusType = 'LOADING' | 'DONE'
 
 const Cast: FC = () => {
-  const { castInfo } = useCast()
-  console.log(castInfo)
+  const [loading, setLoading] = useState<LoadingStatusType>('DONE')
+  const { castInfo } = useCast(setLoading)
   const history = useHistory()
 
   const onClickCastButton = () => {
@@ -33,11 +34,15 @@ const Cast: FC = () => {
         themeButton2={ButtonTheme.DEFAULT}
         className={clsx(styles.navigation)}
       />
-      <div className={styles.listItem}>
-        {castInfo?.map((castInfoItem, j) => {
-          return <ListItem key={j} castInfo={castInfoItem} />
-        })}
-      </div>
+      {loading === 'DONE' ? (
+        <div className={styles.listItem}>
+          {castInfo?.map((castInfoItem, j) => {
+            return <ListItem key={j} castInfo={castInfoItem} />
+          })}
+        </div>
+      ) : (
+        <p>Loading ...</p>
+      )}
     </>
   )
 }
