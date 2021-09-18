@@ -1,19 +1,61 @@
-import type { FC } from 'react'
+import type { FC, ChangeEvent } from 'react'
 import { useState } from 'react'
 import clsx from 'clsx'
 import { Navigation } from '../../components/organisms'
 import { ListItem } from '../../components/organisms/ListItem'
 import { useHistory } from 'react-router-dom'
 import { ButtonTheme } from '../../components/atoms'
+import { SearchBar } from '../../components/molecules'
 import { useCast } from '../../hooks/use-cast'
 import styles from './Cast.module.scss'
+import { CastModel } from '../../models/CastModel'
 //TODO: resolve paths error
 
 export type LoadingStatusType = 'LOADING' | 'DONE'
 
+//Fail to load data: return 'Couldn't ...'
+//No keyword : return castInfo
+//Keyword & Match: return filteredCastInfo
+//Keyword & NoMatch: return 'No match'
+const renderCastList = (
+  castInfo: CastModel[] | undefined,
+  filteredCastInfo: CastModel[] | undefined,
+  keyword: string
+) => {
+  console.log(castInfo)
+  if (!castInfo) return <p>Couldn't fetch data, sorry...</p>
+
+  if (keyword === '') {
+    return (
+      <div className={styles.listItem}>
+        {castInfo.map((castInfoItem: CastModel, j) => {
+          return <ListItem key={j} castInfo={castInfoItem} />
+        })}
+      </div>
+    )
+  } else {
+    if (!filteredCastInfo) {
+      return <p>Couldn't fetch data, sorry...</p>
+    } else if (filteredCastInfo.length === 0) {
+      return <p>No match, sorry...</p>
+    } else {
+      return (
+        <div className={styles.listItem}>
+          {filteredCastInfo?.map((filteredCastInfo, j) => {
+            return <ListItem key={j} castInfo={filteredCastInfo} />
+          })}
+        </div>
+      )
+    }
+  }
+}
+
 const Cast: FC = () => {
   const [loading, setLoading] = useState<LoadingStatusType>('DONE')
-  const { castInfo } = useCast(setLoading)
+  const [searchWord, setSearchWord] = useState<string>('')
+
+  const { castInfo, filterCast, filteredCastInfo } = useCast(setLoading)
+
   const history = useHistory()
 
   const onClickCastButton = () => {
@@ -23,26 +65,35 @@ const Cast: FC = () => {
     history.push('/episodes')
   }
 
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value
+    filterCast(value)
+    setSearchWord(value)
+  }
+
   return (
     <>
-      <Navigation
-        children1="Cast"
-        children2="Episodes"
-        onClickButton1={onClickCastButton}
-        onClickButton2={onClickEpisodesButton}
-        themeButton1={ButtonTheme.SELECTED}
-        themeButton2={ButtonTheme.DEFAULT}
-        className={clsx(styles.navigation)}
-      />
-      {loading === 'DONE' ? (
-        <div className={styles.listItem}>
-          {castInfo?.map((castInfoItem, j) => {
-            return <ListItem key={j} castInfo={castInfoItem} />
-          })}
-        </div>
-      ) : (
-        <p>Loading ...</p>
-      )}
+      <div className={styles.castContainer}>
+        <Navigation
+          children1="Cast"
+          children2="Episodes"
+          onClickButton1={onClickCastButton}
+          onClickButton2={onClickEpisodesButton}
+          themeButton1={ButtonTheme.SELECTED}
+          themeButton2={ButtonTheme.DEFAULT}
+          className={clsx(styles.navigation)}
+        />
+        <SearchBar
+          placeholder="Search for cast members"
+          onChange={onChangeSearch}
+          className={styles.searchBar}
+        />
+        {loading === 'DONE' ? (
+          <>{renderCastList(castInfo, filteredCastInfo, searchWord)}</>
+        ) : (
+          <p>Loading ...</p>
+        )}
+      </div>
     </>
   )
 }

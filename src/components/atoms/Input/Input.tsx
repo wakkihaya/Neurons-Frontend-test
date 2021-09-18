@@ -13,7 +13,7 @@ export const Input: FC<InputProps> = (props) => {
   const { className, placeholder, onChange, ...rest } = props
 
   return (
-    <label className={clsx(className)}>
+    <label className={clsx(styles.label, className)}>
       <input
         className={clsx(styles.input)}
         autoComplete="off"

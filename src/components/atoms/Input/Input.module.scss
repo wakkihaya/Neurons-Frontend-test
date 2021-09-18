@@ -1,8 +1,11 @@
 @import '../../../styles/variables.scss';
 
+.label {
+  padding: 1em 2em;
+}
+
 .input {
   border: none;
-  padding: 1em 2em;
   width: 100%;
   font-size: $medium-font-size;
 }

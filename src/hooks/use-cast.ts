@@ -20,6 +20,7 @@ export const useCast = (
   setLoading: Dispatch<SetStateAction<LoadingStatusType>>
 ) => {
   const [castInfo, setCastInfo] = useState<CastModel[]>()
+  const [filteredCastInfo, setFilteredCastInfo] = useState<CastModel[]>()
 
   useEffect(() => {
     const fetchCastByApi = async () => {
@@ -53,5 +54,19 @@ export const useCast = (
     }
     fetchCastByApi()
   }, [])
-  return { castInfo }
+
+  const filterCast = (keyword: string) => {
+    //Return filtered members when their name or character includes keyword.
+    console.log('Keyword ' + keyword)
+
+    if (!castInfo) return
+    const filteredArray: CastModel[] = castInfo.filter((member: CastModel) => {
+      return (
+        member.character.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
+        member.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+      )
+    })
+    setFilteredCastInfo(filteredArray)
+  }
+  return { castInfo, filterCast, filteredCastInfo }
 }
