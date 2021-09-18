@@ -2,16 +2,16 @@ import React from 'react'
 import clsx from 'clsx'
 import type { FC, ReactNode, MouseEventHandler } from 'react'
 import { Image } from '../../atoms'
-import styles from './ListItem.module.scss'
+import styles from './CastListItem.module.scss'
 import { CastModel } from '~models/CastModel'
 import faceIcon from '../../../assets/images/face.png'
 
-export type ListItemProps = {
+export type CastListItemProps = {
   className?: string
   castInfo: CastModel
 }
 
-export const ListItem: FC<ListItemProps> = (props) => {
+export const CastListItem: FC<CastListItemProps> = (props) => {
   const { className, castInfo } = props
 
   return (

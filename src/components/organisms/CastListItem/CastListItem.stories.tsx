@@ -1,16 +1,16 @@
 import type { Story, Meta } from '@storybook/react'
 
-import type { ListItemProps } from './ListItem'
-import { ListItem } from './ListItem'
+import type { CastListItemProps } from './CastListItem'
+import { CastListItem } from './CastListItem'
 import { CastModel } from '~models/CastModel'
 
 export default {
-  component: ListItem,
-  title: 'Organisms/ListItem',
+  component: CastListItem,
+  title: 'Organisms/CastListItem',
 } as Meta
 
-export const _ListItem: Story<ListItemProps> = (args) => {
-  return <ListItem {...args} />
+export const _CastListItem: Story<CastListItemProps> = (args) => {
+  return <CastListItem {...args} />
 }
 
 const mockCastData: CastModel = {
@@ -23,6 +23,6 @@ const mockCastData: CastModel = {
   imageSrc:
     'https://static.tvmaze.com/uploads/images/medium_portrait/3/8320.jpg',
 }
-_ListItem.args = {
+_CastListItem.args = {
   castInfo: mockCastData,
 }
