@@ -1,0 +1,15 @@
+.episodesContainer {
+  margin: 3em;
+}
+
+.searchBar {
+  width: 700px;
+  margin: 2em 0;
+}
+
+.listItem {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
