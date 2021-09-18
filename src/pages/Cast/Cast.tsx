@@ -2,7 +2,7 @@ import type { FC, ChangeEvent } from 'react'
 import { useState } from 'react'
 import clsx from 'clsx'
 import { Navigation } from '../../components/organisms'
-import { ListItem } from '../../components/organisms/ListItem'
+import { CastListItem } from '../../components/organisms/CastListItem'
 import { useHistory } from 'react-router-dom'
 import { ButtonTheme } from '../../components/atoms'
 import { SearchBar } from '../../components/molecules'
@@ -21,14 +21,13 @@ const renderCastList = (
   filteredCastInfo: CastModel[] | undefined,
   keyword: string
 ) => {
-  console.log(castInfo)
   if (!castInfo) return <p>Couldn't fetch data, sorry...</p>
 
   if (keyword === '') {
     return (
       <div className={styles.listItem}>
         {castInfo.map((castInfoItem: CastModel, j) => {
-          return <ListItem key={j} castInfo={castInfoItem} />
+          return <CastListItem key={j} castInfo={castInfoItem} />
         })}
       </div>
     )
@@ -41,7 +40,7 @@ const renderCastList = (
       return (
         <div className={styles.listItem}>
           {filteredCastInfo?.map((filteredCastInfo, j) => {
-            return <ListItem key={j} castInfo={filteredCastInfo} />
+            return <CastListItem key={j} castInfo={filteredCastInfo} />
           })}
         </div>
       )
