@@ -29,10 +29,10 @@ export const useEpisodes = (
         const formattedEpisodeDataList = episodeDataList.map((item: any) => {
           return {
             imageSrc: item['image']['medium'],
-            name: item['name'],
-            description: removeUnneedPTag(item['summary']),
-            season_episode: `${item['season']} / ${item['number']}`,
-            airTime: item['airtime'],
+            name: item['name'] ?? 'None',
+            description: removeUnneedPTag(item['summary']) ?? 'None',
+            season_episode: `${item['season']} / ${item['number']}` ?? 'None',
+            airTime: item['airtime'] ?? 'None',
             url: item['url'],
           } as EpisodeModel
         })
