@@ -13,9 +13,9 @@ export const Input: FC<InputProps> = (props) => {
   const { className, placeholder, onChange, ...rest } = props
 
   return (
-    <label>
+    <label className={clsx(className)}>
       <input
-        className={clsx(styles.input, className)}
+        className={clsx(styles.input)}
         autoComplete="off"
         autoCorrect="off"
         autoCapitalize="off"

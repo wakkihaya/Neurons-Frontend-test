@@ -13,7 +13,7 @@ export const _Input: Story<InputProps> = (args) => {
 }
 
 _Input.args = {
-  placeholder: 'Search for cast members '
+  placeholder: 'Search for cast members ',
 }
 
 _Input.parameters = {
