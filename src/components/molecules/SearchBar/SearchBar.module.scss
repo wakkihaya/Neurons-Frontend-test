@@ -1,0 +1,19 @@
+@import '../../../styles/variables.scss';
+
+.searchBar {
+  border-radius: 5px;
+  border: solid 1px $heavy-gray;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.searchIcon {
+  width: 17px;
+  height: 17px;
+  padding-left: 1em;
+}
+
+.input {
+  width: 100%;
+}
