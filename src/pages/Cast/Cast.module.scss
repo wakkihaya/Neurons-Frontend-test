@@ -1,0 +1,10 @@
+.navigation {
+  margin-left: 2em;
+}
+
+.listItem {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}

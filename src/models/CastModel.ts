@@ -5,4 +5,5 @@ export type CastModel = {
   birthday: string
   character: string
   charLink: string
+  imageSrc: string
 }

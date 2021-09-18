@@ -1,8 +1,9 @@
-@import '~/styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .listItem {
   display: flex;
   flex-direction: column;
+  margin: 2em 0;
 }
 
 .listItem_Card {
@@ -11,6 +12,7 @@
   height: 180px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+  overflow: hidden;
 }
 
 .listItem_Card_Image {
@@ -22,6 +24,8 @@
   top: 0;
   right: 0;
   width: 24px;
+  background: white;
+  border-radius: 5px;
 }
 
 .listItem_Card_MainUserInfo {

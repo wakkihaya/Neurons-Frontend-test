@@ -1,8 +1,9 @@
-@import '~/styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .navigation {
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
 }
 
 .button {
