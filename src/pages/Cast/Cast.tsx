@@ -9,9 +9,8 @@ import { SearchBar } from '../../components/molecules'
 import { useCast } from '../../hooks/use-cast'
 import styles from './Cast.module.scss'
 import { CastModel } from '../../models/CastModel'
+import { LoadingStatus } from '~models/LoadingStatus'
 //TODO: resolve paths error
-
-export type LoadingStatusType = 'LOADING' | 'DONE'
 
 //Fail to load data: return 'Couldn't ...'
 //No keyword : return castInfo
@@ -51,7 +50,7 @@ const renderCastList = (
 }
 
 const Cast: FC = () => {
-  const [loading, setLoading] = useState<LoadingStatusType>('DONE')
+  const [loading, setLoading] = useState<LoadingStatus>('DONE')
   const [searchWord, setSearchWord] = useState<string>('')
 
   const { castInfo, filterCast, filteredCastInfo } = useCast(setLoading)

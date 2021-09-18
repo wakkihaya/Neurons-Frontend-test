@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { LoadingStatusType } from '~pages/Cast/Cast'
+import { LoadingStatus } from '~models/LoadingStatus'
 import { CastModel } from '~models/CastModel'
 
 //Param: {birthday: '1982-03-10'} Return: string(e.g. '23')
@@ -17,7 +17,7 @@ const calculateAge = (birthday: string) => {
 }
 
 export const useCast = (
-  setLoading: Dispatch<SetStateAction<LoadingStatusType>>
+  setLoading: Dispatch<SetStateAction<LoadingStatus>>
 ) => {
   const [castInfo, setCastInfo] = useState<CastModel[]>()
   const [filteredCastInfo, setFilteredCastInfo] = useState<CastModel[]>()
@@ -57,8 +57,6 @@ export const useCast = (
 
   const filterCast = (keyword: string) => {
     //Return filtered members when their name or character includes keyword.
-    console.log('Keyword ' + keyword)
-
     if (!castInfo) return
     const filteredArray: CastModel[] = castInfo.filter((member: CastModel) => {
       return (
