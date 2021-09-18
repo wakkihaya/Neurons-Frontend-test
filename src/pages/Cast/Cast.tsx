@@ -8,6 +8,8 @@ import { useCast } from '../../hooks/use-cast'
 import styles from './Cast.module.scss'
 //TODO: resolve paths error
 
+//TODO: show loading icon.
+
 const Cast: FC = () => {
   const { castInfo } = useCast()
   console.log(castInfo)

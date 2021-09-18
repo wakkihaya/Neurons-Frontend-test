@@ -21,9 +21,8 @@ const mockCastData: CastModel = {
   character: 'Richard',
   charLink: 'https://neuronsinc.com',
   imageSrc:
-    'https://static.tvmaze.com/uploads/images/medium_portrait/49/123646.jpg',
+    'https://static.tvmaze.com/uploads/images/medium_portrait/3/8320.jpg',
 }
-
 _ListItem.args = {
   castInfo: mockCastData,
 }

@@ -17,7 +17,6 @@ export const ListItem: FC<ListItemProps> = (props) => {
   return (
     <div className={clsx(styles.listItem, className)}>
       <div className={styles.listItem_Card}>
-        {/* TODO: fix a bug to show the image from external */}
         <Image
           src={castInfo.imageSrc}
           alt={castInfo.character}
