@@ -14,11 +14,11 @@ import { LoadingStatus } from '~models/LoadingStatus'
 
 //Fail to load data: return 'Couldn't ...'
 //No keyword : return castInfo
-//Keyword & Match: return filteredCastInfo
+//Keyword & Match: return searchedCastInfo
 //Keyword & NoMatch: return 'No match'
 const renderCastList = (
   castInfo: CastModel[] | undefined,
-  filteredCastInfo: CastModel[] | undefined,
+  searchedCastInfo: CastModel[] | undefined,
   keyword: string
 ) => {
   if (!castInfo) return <p>Couldn't fetch data, sorry...</p>
@@ -32,15 +32,15 @@ const renderCastList = (
       </div>
     )
   } else {
-    if (!filteredCastInfo) {
+    if (!searchedCastInfo) {
       return <p>Couldn't fetch data, sorry...</p>
-    } else if (filteredCastInfo.length === 0) {
+    } else if (searchedCastInfo.length === 0) {
       return <p>No match, sorry...</p>
     } else {
       return (
         <div className={styles.listItem}>
-          {filteredCastInfo?.map((filteredCastInfo, j) => {
-            return <CastListItem key={j} castInfo={filteredCastInfo} />
+          {searchedCastInfo?.map((searchedCastInfoItem, j) => {
+            return <CastListItem key={j} castInfo={searchedCastInfoItem} />
           })}
         </div>
       )
@@ -52,7 +52,7 @@ const Cast: FC = () => {
   const [loading, setLoading] = useState<LoadingStatus>('DONE')
   const [searchWord, setSearchWord] = useState<string>('')
 
-  const { castInfo, filterCast, filteredCastInfo } = useCast(setLoading)
+  const { castInfo, searchCast, searchedCastInfo } = useCast(setLoading)
 
   const history = useHistory()
 
@@ -65,7 +65,7 @@ const Cast: FC = () => {
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value
-    filterCast(value)
+    searchCast(value)
     setSearchWord(value)
   }
 
@@ -86,7 +86,7 @@ const Cast: FC = () => {
           className={styles['castContainer--searchBar']}
         />
         {loading === 'DONE' ? (
-          <>{renderCastList(castInfo, filteredCastInfo, searchWord)}</>
+          <>{renderCastList(castInfo, searchedCastInfo, searchWord)}</>
         ) : (
           <p>Loading ...</p>
         )}

@@ -14,11 +14,11 @@ import { LoadingStatus } from '~models/LoadingStatus'
 
 //Fail to load data: return 'Couldn't ...'
 //No keyword : return episodeInfo
-//Keyword & Match: return filteredEpisodeInfo
+//Keyword & Match: return searchedEpisodeInfo
 //Keyword & NoMatch: return 'No match'
 const renderEpisodeList = (
   episodeInfo: EpisodeModel[] | undefined,
-  filteredEpisodeInfo: EpisodeModel[] | undefined,
+  searchedEpisodeInfo: EpisodeModel[] | undefined,
   keyword: string
 ) => {
   if (!episodeInfo) return <p>Couldn't fetch data, sorry...</p>
@@ -32,15 +32,17 @@ const renderEpisodeList = (
       </div>
     )
   } else {
-    if (!filteredEpisodeInfo) {
+    if (!searchedEpisodeInfo) {
       return <p>Couldn't fetch data, sorry...</p>
-    } else if (filteredEpisodeInfo.length === 0) {
+    } else if (searchedEpisodeInfo.length === 0) {
       return <p>No match, sorry...</p>
     } else {
       return (
         <div className={styles.listItem}>
-          {filteredEpisodeInfo?.map((filteredEpisodeInfo, j) => {
-            return <EpisodeListItem key={j} episodeInfo={filteredEpisodeInfo} />
+          {searchedEpisodeInfo?.map((searchedEpisodeInfoItem, j) => {
+            return (
+              <EpisodeListItem key={j} episodeInfo={searchedEpisodeInfoItem} />
+            )
           })}
         </div>
       )
@@ -52,7 +54,7 @@ const Episodes: FC = () => {
   const [loading, setLoading] = useState<LoadingStatus>('DONE')
   const [searchWord, setSearchWord] = useState<string>('')
 
-  const { episodeInfo, filterEpisode, filteredEpisodeInfo } = useEpisodes(
+  const { episodeInfo, searchEpisode, searchedEpisodeInfo } = useEpisodes(
     setLoading
   )
 
@@ -67,7 +69,7 @@ const Episodes: FC = () => {
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value
-    filterEpisode(value)
+    searchEpisode(value)
     setSearchWord(value)
   }
 
@@ -88,7 +90,7 @@ const Episodes: FC = () => {
           className={styles['episodesContainer--searchBar']}
         />
         {loading === 'DONE' ? (
-          <>{renderEpisodeList(episodeInfo, filteredEpisodeInfo, searchWord)}</>
+          <>{renderEpisodeList(episodeInfo, searchedEpisodeInfo, searchWord)}</>
         ) : (
           <p>Loading ...</p>
         )}

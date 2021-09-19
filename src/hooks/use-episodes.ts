@@ -13,7 +13,7 @@ export const useEpisodes = (
   setLoading: Dispatch<SetStateAction<LoadingStatus>>
 ) => {
   const [episodeInfo, setEpisodeInfo] = useState<EpisodeModel[]>()
-  const [filteredEpisodeInfo, setFilteredEpisodeInfo] = useState<
+  const [searchedEpisodeInfo, setSearchedEpisodeInfo] = useState<
     EpisodeModel[]
   >()
 
@@ -46,10 +46,10 @@ export const useEpisodes = (
     fetchEpisodeByApi()
   }, [])
 
-  const filterEpisode = (keyword: string) => {
+  const searchEpisode = (keyword: string) => {
     //Return filtered episode when its name or description includes keyword.
     if (!episodeInfo) return
-    const filteredArray: EpisodeModel[] = episodeInfo.filter(
+    const searchedArray: EpisodeModel[] = episodeInfo.filter(
       (episode: EpisodeModel) => {
         return (
           episode.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
@@ -58,7 +58,7 @@ export const useEpisodes = (
         )
       }
     )
-    setFilteredEpisodeInfo(filteredArray)
+    setSearchedEpisodeInfo(searchedArray)
   }
-  return { episodeInfo, filterEpisode, filteredEpisodeInfo }
+  return { episodeInfo, searchEpisode, searchedEpisodeInfo }
 }
