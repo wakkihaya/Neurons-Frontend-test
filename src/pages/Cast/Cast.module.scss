@@ -1,8 +1,15 @@
 .castContainer {
   margin: 3em;
-  &--searchBar {
+  &--filterGroup {
+    display: flex;
+    flex-direction: row;
+  }
+  &--filterGroup-searchBar {
     width: 700px;
     margin: 2em 0;
+  }
+  &--filterGroup-filter {
+    width: 230px;
   }
 }
 

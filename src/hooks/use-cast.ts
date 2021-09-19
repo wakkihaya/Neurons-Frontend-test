@@ -20,7 +20,6 @@ export const useCast = (
   setLoading: Dispatch<SetStateAction<LoadingStatus>>
 ) => {
   const [castInfo, setCastInfo] = useState<CastModel[]>()
-  const [searchedCastInfo, setSearchedCastInfo] = useState<CastModel[]>()
 
   useEffect(() => {
     const fetchCastByApi = async () => {
@@ -46,6 +45,7 @@ export const useCast = (
             imageSrc: item['person']['image']['medium'],
           } as CastModel
         })
+        if (!formattedCastDataList) return
         setCastInfo(formattedCastDataList)
       } catch (error) {
         console.error(error)
@@ -56,16 +56,41 @@ export const useCast = (
     fetchCastByApi()
   }, [])
 
-  const searchCast = (keyword: string) => {
-    //Return filtered members when their name or character includes keyword.
-    if (!castInfo) return
-    const searchedArray: CastModel[] = castInfo.filter((member: CastModel) => {
-      return (
-        member.character.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
-        member.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-      )
-    })
-    setSearchedCastInfo(searchedArray)
+  //Return filtered members whose name or character includes keyword.
+  const searchCast = (
+    keyword: string,
+    targetCastInfo: CastModel[] | undefined
+  ) => {
+    if (!targetCastInfo) return
+    const searchedArray: CastModel[] = targetCastInfo.filter(
+      (member: CastModel) => {
+        return (
+          member.character.toLowerCase().indexOf(keyword.toLowerCase()) !==
+            -1 ||
+          member.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+        )
+      }
+    )
+    return searchedArray
   }
-  return { castInfo, searchCast, searchedCastInfo }
+
+  //Return filtered members whose country is targetCountry. For Filtering feature.
+  const filterCastByCountry = (
+    targetCountries: string[],
+    targetCastInfo: CastModel[] | undefined
+  ) => {
+    if (!targetCastInfo) return
+    const filteredArray: CastModel[] = targetCastInfo.filter(
+      (member: CastModel) => {
+        return targetCountries.indexOf(member.country) !== -1
+      }
+    )
+    return filteredArray
+  }
+
+  return {
+    castInfo,
+    searchCast,
+    filterCastByCountry,
+  }
 }

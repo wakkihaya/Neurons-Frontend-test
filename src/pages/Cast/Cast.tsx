@@ -1,7 +1,7 @@
 import type { FC, ChangeEvent } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import clsx from 'clsx'
-import { Navigation } from '../../components/organisms'
+import { Navigation, Filter } from '../../components/organisms'
 import { CastListItem } from '../../components/organisms'
 import { useHistory } from 'react-router-dom'
 import { ButtonTheme } from '../../components/atoms'
@@ -17,42 +17,65 @@ import { LoadingStatus } from '~models/LoadingStatus'
 //Keyword & Match: return searchedCastInfo
 //Keyword & NoMatch: return 'No match'
 const renderCastList = (
-  castInfo: CastModel[] | undefined,
-  searchedCastInfo: CastModel[] | undefined,
-  keyword: string
+  currentCastInfo: CastModel[] | undefined,
+  searchWord: string,
+  isFiltered: boolean
 ) => {
-  if (!castInfo) return <p>Couldn't fetch data, sorry...</p>
+  if (!currentCastInfo) return <p>Couldn't fetch data, sorry...</p>
 
-  if (keyword === '') {
+  if (currentCastInfo.length === 0) {
+    return <p>No match, sorry...</p>
+  } else {
     return (
       <div className={styles.listItem}>
-        {castInfo.map((castInfoItem: CastModel, j) => {
-          return <CastListItem key={j} castInfo={castInfoItem} />
+        {currentCastInfo.map((currentCastInfoItem: CastModel, j) => {
+          return <CastListItem key={j} castInfo={currentCastInfoItem} />
         })}
       </div>
     )
-  } else {
-    if (!searchedCastInfo) {
-      return <p>Couldn't fetch data, sorry...</p>
-    } else if (searchedCastInfo.length === 0) {
-      return <p>No match, sorry...</p>
-    } else {
-      return (
-        <div className={styles.listItem}>
-          {searchedCastInfo?.map((searchedCastInfoItem, j) => {
-            return <CastListItem key={j} castInfo={searchedCastInfoItem} />
-          })}
-        </div>
-      )
-    }
   }
+}
+
+const extractCountries = (castInfo: CastModel[] | undefined) => {
+  if (!castInfo) return
+  const countryArray: string[] = castInfo.map(
+    (member: CastModel) => member.country
+  )
+  //Remove duplication.
+  const newCountryArray = countryArray.filter(
+    (country: string, index, self) => {
+      return self.indexOf(country) === index
+    }
+  )
+  return newCountryArray
 }
 
 const Cast: FC = () => {
   const [loading, setLoading] = useState<LoadingStatus>('DONE')
   const [searchWord, setSearchWord] = useState<string>('')
+  const [isFiltered, setIsFiltered] = useState<boolean>(false)
 
-  const { castInfo, searchCast, searchedCastInfo } = useCast(setLoading)
+  //castInfo: All original data. Stored because of use for search feature.
+  const { castInfo, searchCast, filterCastByCountry } = useCast(setLoading)
+
+  //currentCastInfo: used for rendering current cast.
+  const [currentCastInfo, setCurrentCastInfo] = useState<
+    CastModel[] | undefined
+  >([])
+
+  //filteredCastInfo: castInfo data arranged by filter-item. Stored because of use for search feature.
+  const [filteredCastInfo, setFilteredCastInfo] = useState<
+    CastModel[] | undefined
+  >([])
+
+  const [countries, setCountries] = useState<string[]>([])
+
+  //Wait for fetching data from api.
+  useEffect(() => {
+    setCurrentCastInfo(castInfo)
+    const uniqueCountries = extractCountries(castInfo)
+    setCountries(uniqueCountries ?? [])
+  }, [castInfo])
 
   const history = useHistory()
 
@@ -63,10 +86,52 @@ const Cast: FC = () => {
     history.push('/episodes')
   }
 
+  //1. Search members from original cast info.
+  //2. Search members from filtered cast info.
+  const handleSearchFromSelectedCastInfo = (
+    searchWord: string,
+    targetCastInfo: CastModel[] | undefined
+  ) => {
+    if (searchWord === '') {
+      setCurrentCastInfo(targetCastInfo)
+    } else {
+      setCurrentCastInfo(searchCast(searchWord, targetCastInfo))
+    }
+  }
+
+  // Not filtered ->FROM castInfo
+  // Filtered ->FROM filteredCastInfo
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value
-    searchCast(value)
+
+    if (isFiltered) {
+      handleSearchFromSelectedCastInfo(value, filteredCastInfo)
+    } else {
+      handleSearchFromSelectedCastInfo(value, castInfo)
+    }
     setSearchWord(value)
+  }
+
+  //filterCheckItems: ['Canada', 'India', ...]
+  //No check item -> show castInfo
+  const onClickUpdateButton = (filterCheckItems: string[]) => {
+    if (filterCheckItems.length === 0) {
+      setIsFiltered(false)
+      setCurrentCastInfo(castInfo)
+      if (searchWord === '') return
+
+      //Should re-search from castInfo array, after filtering.
+      handleSearchFromSelectedCastInfo(searchWord, castInfo)
+    } else {
+      const resultCastInfo = filterCastByCountry(filterCheckItems, castInfo)
+      setFilteredCastInfo(resultCastInfo)
+      setIsFiltered(true)
+      setCurrentCastInfo(resultCastInfo)
+
+      if (searchWord === '') return
+      //Should re-search from filtered castInfo array, after filtering.
+      handleSearchFromSelectedCastInfo(searchWord, filteredCastInfo)
+    }
   }
 
   return (
@@ -80,13 +145,21 @@ const Cast: FC = () => {
           themeButton1={ButtonTheme.SELECTED}
           themeButton2={ButtonTheme.DEFAULT}
         />
-        <SearchBar
-          placeholder="Search for cast members"
-          onChange={onChangeSearch}
-          className={styles['castContainer--searchBar']}
-        />
+        <div className={styles['castContainer--filterGroup']}>
+          <SearchBar
+            placeholder="Search for cast members"
+            onChange={onChangeSearch}
+            className={styles['castContainer--filterGroup-searchBar']}
+          />
+          <Filter
+            category="Country"
+            values={countries} // TODO:
+            onClickUpdateButton={onClickUpdateButton}
+            className={styles['castContainer--filterGroup-filter']}
+          />
+        </div>
         {loading === 'DONE' ? (
-          <>{renderCastList(castInfo, searchedCastInfo, searchWord)}</>
+          <>{renderCastList(currentCastInfo, searchWord, isFiltered)}</>
         ) : (
           <p>Loading ...</p>
         )}
