@@ -1,0 +1,49 @@
+@import '../../../styles/variables.scss';
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  align-items: flex-start;
+  padding: 1em 2em;
+
+  &--title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  &--title__border {
+    border-bottom: solid 1px $light-gray;
+  }
+
+  &--title-text {
+    font-size: $small-font-size;
+    margin-left: 0.5em;
+  }
+  &--contents {
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &--contents-name {
+    font-size: $medium-font-size;
+    font-weight: bold;
+    margin-top: 1em;
+  }
+  &--contents-items {
+    margin-bottom: 1em;
+  }
+  &--contents-update-button {
+    width: 100%;
+    background: $main-color;
+    color: white;
+    font-size: $large-font-size;
+    padding: 0.3em;
+    text-align: center;
+  }
+}
