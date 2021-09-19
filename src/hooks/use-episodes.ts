@@ -13,9 +13,6 @@ export const useEpisodes = (
   setLoading: Dispatch<SetStateAction<LoadingStatus>>
 ) => {
   const [episodeInfo, setEpisodeInfo] = useState<EpisodeModel[]>()
-  const [searchedEpisodeInfo, setSearchedEpisodeInfo] = useState<
-    EpisodeModel[]
-  >()
 
   useEffect(() => {
     const fetchEpisodeByApi = async () => {
@@ -36,6 +33,7 @@ export const useEpisodes = (
             url: item['url'],
           } as EpisodeModel
         })
+        if (!formattedEpisodeDataList) return
         setEpisodeInfo(formattedEpisodeDataList)
       } catch (error) {
         console.error(error)
@@ -46,10 +44,13 @@ export const useEpisodes = (
     fetchEpisodeByApi()
   }, [])
 
-  const searchEpisode = (keyword: string) => {
+  const searchEpisode = (
+    keyword: string,
+    targetEpisodeInfo: EpisodeModel[] | undefined
+  ) => {
     //Return filtered episode when its name or description includes keyword.
-    if (!episodeInfo) return
-    const searchedArray: EpisodeModel[] = episodeInfo.filter(
+    if (!targetEpisodeInfo) return
+    const searchedArray: EpisodeModel[] = targetEpisodeInfo.filter(
       (episode: EpisodeModel) => {
         return (
           episode.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
@@ -58,7 +59,22 @@ export const useEpisodes = (
         )
       }
     )
-    setSearchedEpisodeInfo(searchedArray)
+    return searchedArray
   }
-  return { episodeInfo, searchEpisode, searchedEpisodeInfo }
+
+  //Return filtered episodes by airtaime. For Filtering feature.
+  const filterEpisodeByAirtime = (
+    targetAirtime: string[],
+    targetEpisodeInfo: EpisodeModel[] | undefined
+  ) => {
+    if (!targetEpisodeInfo) return
+    const filteredArray: EpisodeModel[] = targetEpisodeInfo.filter(
+      (episode: EpisodeModel) => {
+        return targetAirtime.indexOf(episode.airTime) !== -1
+      }
+    )
+    return filteredArray
+  }
+
+  return { episodeInfo, searchEpisode, filterEpisodeByAirtime }
 }

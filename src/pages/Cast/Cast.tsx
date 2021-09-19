@@ -14,14 +14,8 @@ import { CheckboxModel } from '~models/CheckboxModel'
 //TODO: resolve paths error
 
 //Fail to load data: return 'Couldn't ...'
-//No keyword : return castInfo
-//Keyword & Match: return searchedCastInfo
-//Keyword & NoMatch: return 'No match'
-const renderCastList = (
-  currentCastInfo: CastModel[] | undefined,
-  searchWord: string,
-  isFiltered: boolean
-) => {
+//NoMatch: return 'No match'
+const renderCastList = (currentCastInfo: CastModel[] | undefined) => {
   if (!currentCastInfo) return <p>Couldn't fetch data, sorry...</p>
 
   if (currentCastInfo.length === 0) {
@@ -58,8 +52,6 @@ const extractCountries = (castInfo: CastModel[] | undefined) => {
   )
   return checkBoxModelCountryArray
 }
-
-//TODO: filter Episodes
 
 const Cast: FC = () => {
   const [loading, setLoading] = useState<LoadingStatus>('DONE')
@@ -123,7 +115,7 @@ const Cast: FC = () => {
     setSearchWord(value)
   }
 
-  //filterCheckItems: ['Canada', 'India', ...]
+  //filterCheckItems: [{value: 'Canada', checked: true},{value: 'India',checked: falase}, ...]
   //No check item -> show castInfo
   const onClickUpdateButton = (filterCheckItems: CheckboxModel[]) => {
     const filterCheckedItemsArray: CheckboxModel[] = filterCheckItems.filter(
@@ -176,7 +168,7 @@ const Cast: FC = () => {
           />
         </div>
         {loading === 'DONE' ? (
-          <>{renderCastList(currentCastInfo, searchWord, isFiltered)}</>
+          <>{renderCastList(currentCastInfo)}</>
         ) : (
           <p>Loading ...</p>
         )}
