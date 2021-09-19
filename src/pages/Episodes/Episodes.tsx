@@ -21,10 +21,14 @@ const renderEpisodeList = (currentEpisodeInfo: EpisodeModel[] | undefined) => {
     return <p>No match, sorry...</p>
   } else {
     return (
-      <div className={styles.listItem}>
+      <div className={styles['list']}>
         {currentEpisodeInfo.map((currentEpisodeInfoItem: EpisodeModel, j) => {
           return (
-            <EpisodeListItem key={j} episodeInfo={currentEpisodeInfoItem} />
+            <EpisodeListItem
+              key={j}
+              episodeInfo={currentEpisodeInfoItem}
+              className={styles['list--item']}
+            />
           )
         })}
       </div>

@@ -22,9 +22,21 @@
   }
 }
 
-.listItem {
+.list {
   margin-top: 2em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
+  &--item {
+    animation: fadeIn 1.5s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -11,6 +11,7 @@ import styles from './Cast.module.scss'
 import { CastModel } from '../../models/CastModel'
 import { LoadingStatus } from '~models/LoadingStatus'
 import { CheckboxModel } from '~models/CheckboxModel'
+
 //TODO: resolve paths error
 
 //Fail to load data: return 'Couldn't ...'
@@ -22,9 +23,15 @@ const renderCastList = (currentCastInfo: CastModel[] | undefined) => {
     return <p>No match, sorry...</p>
   } else {
     return (
-      <div className={styles.listItem}>
+      <div className={styles['list']}>
         {currentCastInfo.map((currentCastInfoItem: CastModel, j) => {
-          return <CastListItem key={j} castInfo={currentCastInfoItem} />
+          return (
+            <CastListItem
+              key={j}
+              castInfo={currentCastInfoItem}
+              className={styles['list--item']}
+            />
+          )
         })}
       </div>
     )

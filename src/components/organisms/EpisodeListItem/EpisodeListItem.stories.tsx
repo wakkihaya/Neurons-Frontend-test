@@ -17,8 +17,10 @@ const mockEpisodeData: EpisodeModel = {
   name: 'Elon Musk join!?',
   description:
     'Elon Musk joined the team. This is super awesome awesome awesome. Awesome Awesome Awesome.',
-  season_episode: '2/2',
+  season: '2',
+  episode: '2',
   airTime: '22:00',
+  url: 'test.com',
   imageSrc:
     'https://static.tvmaze.com/uploads/images/medium_portrait/3/8320.jpg',
 }
