@@ -18,7 +18,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
   disabled?: HTMLInputElement['disabled']
   required?: HTMLInputElement['required']
-  checked: boolean
+  checked?: boolean
   id?: string
   name?: string
   value?: string | number
@@ -46,7 +46,8 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     <label
       className={clsx(
         styles['checkbox'],
-        disabled && styles['checkbox__disabled']
+        disabled && styles['checkbox__disabled'],
+        className
       )}
     >
       <input
@@ -61,8 +62,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         className={clsx(
           disabled && styles['checkbox--input__disabled'],
           styles['checkbox--input'],
-          boxSize,
-          className
+          boxSize
         )}
         onChange={onChange}
       />
