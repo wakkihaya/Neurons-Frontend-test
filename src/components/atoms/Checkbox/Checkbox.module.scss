@@ -1,0 +1,30 @@
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &__disabled {
+    cursor: not-allowed;
+  }
+  &--input {
+    margin-right: 0.5em;
+    cursor: pointer;
+    opacity: 100;
+  }
+  &--input__disabled {
+    opacity: 80;
+  }
+}
+
+/* Size */
+.small {
+  width: 1em;
+  height: 1em;
+}
+.medium {
+  width: 1.5em;
+  height: 1.5em;
+}
+.large {
+  width: 2em;
+  height: 2em;
+}
