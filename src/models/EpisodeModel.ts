@@ -3,6 +3,6 @@ export type EpisodeModel = {
   name: string
   description: string
   season_episode: string
-  airTime: string | number
+  airTime: string
   url: string
 }

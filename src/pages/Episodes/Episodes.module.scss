@@ -1,8 +1,24 @@
-.episodesContainer {
+.episodeContainer {
   margin: 3em;
-  &--searchBar {
-    width: 700px;
+  &--filterGroup {
+    display: flex;
+    flex-direction: row;
     margin: 2em 0;
+    align-items: center;
+    position: relative;
+  }
+  &--filterGroup-searchBar {
+    width: 700px;
+  }
+  &--filterGroup-filter {
+    height: 30px;
+    width: 72px;
+    right: 2em;
+    margin-left: auto;
+    z-index: 100;
+    position: absolute;
+    top: calc(50% - 15px);
+    background: white;
   }
 }
 
