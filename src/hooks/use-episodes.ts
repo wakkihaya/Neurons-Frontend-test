@@ -28,7 +28,8 @@ export const useEpisodes = (
             imageSrc: item['image']['medium'],
             name: item['name'] ?? 'None',
             description: removeUnneedPTag(item['summary']) ?? 'None',
-            season_episode: `${item['season']} / ${item['number']}` ?? 'None',
+            season: item['season'] ?? '0',
+            episode: item['number'] ?? '0',
             airTime: item['airtime'] ?? 'None',
             url: item['url'],
           } as EpisodeModel

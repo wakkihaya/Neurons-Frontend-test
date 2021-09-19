@@ -15,6 +15,7 @@ export const _CastListItem: Story<CastListItemProps> = (args) => {
 
 const mockCastData: CastModel = {
   name: 'Name',
+  profileLink: 'test.com',
   age: '20',
   country: 'Pied country',
   birthday: '2000-0-0',

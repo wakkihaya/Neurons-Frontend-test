@@ -10,9 +10,17 @@ export type EpisodeListItemProps = {
   episodeInfo: EpisodeModel
 }
 
+// 1 -> 01, 10 -> 10
+const reviseNumber = (targetNumber: string) => {
+  if (parseInt(targetNumber) < 10) return '0' + targetNumber
+  else return targetNumber
+}
+
 export const EpisodeListItem: FC<EpisodeListItemProps> = (props) => {
   const { className, episodeInfo } = props
 
+  const revisedSeason = reviseNumber(episodeInfo.season)
+  const revisedEpisode = reviseNumber(episodeInfo.episode)
   return (
     <div className={clsx(styles['listItem'], className)}>
       <div className={styles['listItem--card']}>
@@ -25,7 +33,12 @@ export const EpisodeListItem: FC<EpisodeListItemProps> = (props) => {
           <a href={episodeInfo.url} target="_blank">
             "{episodeInfo.name}"
           </a>
-          ,{episodeInfo.season_episode}, ({episodeInfo.airTime})
+          <p>
+            [S{revisedSeason}/E{revisedEpisode}]
+          </p>
+        </div>
+        <div className={styles['listItem--card-airtime']}>
+          {episodeInfo.airTime}
         </div>
       </div>
       <div className={styles['listItem--otherInfo']}>
