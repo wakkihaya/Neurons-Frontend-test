@@ -86,8 +86,6 @@ const Cast: FC = () => {
     history.push('/episodes')
   }
 
-  //1. Search members from original cast info.
-  //2. Search members from filtered cast info.
   const handleSearchFromSelectedCastInfo = (
     searchWord: string,
     targetCastInfo: CastModel[] | undefined
@@ -99,8 +97,8 @@ const Cast: FC = () => {
     }
   }
 
-  // Not filtered ->FROM castInfo
-  // Filtered ->FROM filteredCastInfo
+  //1. Search members from original cast info.
+  //2. Search members from filtered cast info.
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value
 

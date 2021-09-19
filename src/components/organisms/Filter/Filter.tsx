@@ -30,7 +30,13 @@ export const Filter: FC<FilterProps> = (props) => {
   }
 
   return (
-    <div className={clsx(className, styles['filter'])}>
+    <div
+      className={clsx(
+        styles['filter'],
+        className,
+        isOpenFilter ? styles['filter__open'] : styles['filter__close']
+      )}
+    >
       <div
         className={clsx(
           styles['filter--title'],
