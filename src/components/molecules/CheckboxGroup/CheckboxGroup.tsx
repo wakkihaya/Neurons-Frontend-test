@@ -2,25 +2,27 @@ import clsx from 'clsx'
 import { Checkbox } from '../../atoms'
 import type { ChangeEventHandler, FC } from 'react'
 import styles from './CheckboxGroup.module.scss'
+import { CheckboxModel } from '../../../models/CheckboxModel'
 
 export type CheckboxGroupProps = {
-  values: string[]
+  valueStatuses: CheckboxModel[]
   onChange: ChangeEventHandler<HTMLInputElement>
   className?: string
 }
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
-  const { values, onChange, className } = props
+  const { valueStatuses, onChange, className } = props
   return (
     <div className={clsx(className, styles['checkbox-group'])}>
-      {values.map((value: string, j) => {
+      {valueStatuses.map((status: CheckboxModel, j) => {
         return (
           <Checkbox
-            value={value}
+            value={status.value}
+            checked={status.checked}
             onChange={onChange}
             className={styles['checkbox-group--item']}
             key={j}
-            children={value}
+            children={status.value}
           />
         )
       })}

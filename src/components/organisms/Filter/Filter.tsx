@@ -1,32 +1,47 @@
-import { ChangeEvent, ChangeEventHandler, useState } from 'react'
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import type { FC, ReactNode, MouseEventHandler } from 'react'
 import styles from './Filter.module.scss' //TODO: add d.ts
 import { CheckboxGroup } from '../../molecules'
 import { FaFilter } from 'react-icons/fa'
+import { CheckboxModel } from '~models/CheckboxModel'
 
 export type FilterProps = {
   category: string
-  values: string[]
-  onClickUpdateButton: (values: string[]) => void
+  valueStatuses: CheckboxModel[]
+  onClickUpdateButton: (valueStatuses: CheckboxModel[]) => void
   className?: string
 }
 
 export const Filter: FC<FilterProps> = (props) => {
-  const { category, values, onClickUpdateButton, className } = props
+  const {
+    category,
+    valueStatuses: initialData,
+    onClickUpdateButton,
+    className,
+  } = props
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false)
-  const [checkedItems, setCheckedItems] = useState<string[]>([])
+
+  const [valueStatuses, setValueStatuses] = useState<CheckboxModel[]>([])
+
+  useEffect(() => {
+    setValueStatuses(initialData)
+  }, [initialData])
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const changedValue = event.target.value
-    if (event.target.checked) {
-      console.log(changedValue)
-      setCheckedItems([...checkedItems, changedValue])
-    } else {
-      //If checked-item unchecked, remove it.
-      const newArray = checkedItems.filter((item) => item !== changedValue)
-      setCheckedItems(newArray)
-    }
+    const changedChecktype = event.target.checked
+    const newValueStatuses = valueStatuses.map((valueStatus: CheckboxModel) => {
+      if (valueStatus.value === event.target.value) {
+        return {
+          value: changedValue,
+          checked: changedChecktype,
+        }
+      } else {
+        return valueStatus
+      }
+    })
+    setValueStatuses(newValueStatuses)
   }
 
   return (
@@ -53,13 +68,16 @@ export const Filter: FC<FilterProps> = (props) => {
         <div className={styles['filter--contents']}>
           <div className={styles['filter--contents-name']}>{category}</div>
           <CheckboxGroup
-            values={values}
+            valueStatuses={valueStatuses}
             onChange={onChange}
             className={styles['filter--contents-items']}
           />
           <div
             className={styles['filter--contents-update-button']}
-            onClick={() => onClickUpdateButton(checkedItems)}
+            onClick={() => {
+              onClickUpdateButton(valueStatuses)
+              setIsOpenFilter(false)
+            }}
           >
             Update
           </div>

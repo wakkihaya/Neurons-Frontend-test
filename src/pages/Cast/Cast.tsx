@@ -10,6 +10,7 @@ import { useCast } from '../../hooks/use-cast'
 import styles from './Cast.module.scss'
 import { CastModel } from '../../models/CastModel'
 import { LoadingStatus } from '~models/LoadingStatus'
+import { CheckboxModel } from '~models/CheckboxModel'
 //TODO: resolve paths error
 
 //Fail to load data: return 'Couldn't ...'
@@ -47,8 +48,18 @@ const extractCountries = (castInfo: CastModel[] | undefined) => {
       return self.indexOf(country) === index
     }
   )
-  return newCountryArray
+  const checkBoxModelCountryArray = newCountryArray.map(
+    (countryItem: string) => {
+      return {
+        value: countryItem,
+        checked: false,
+      } as CheckboxModel
+    }
+  )
+  return checkBoxModelCountryArray
 }
+
+//TODO: filter Episodes
 
 const Cast: FC = () => {
   const [loading, setLoading] = useState<LoadingStatus>('DONE')
@@ -68,13 +79,15 @@ const Cast: FC = () => {
     CastModel[] | undefined
   >([])
 
-  const [countries, setCountries] = useState<string[]>([])
+  const [countriesCheckBox, setCountriesCheckBox] = useState<CheckboxModel[]>(
+    []
+  )
 
   //Wait for fetching data from api.
   useEffect(() => {
     setCurrentCastInfo(castInfo)
-    const uniqueCountries = extractCountries(castInfo)
-    setCountries(uniqueCountries ?? [])
+    const newCountryCheckboxArray = extractCountries(castInfo) ?? []
+    setCountriesCheckBox(newCountryCheckboxArray)
   }, [castInfo])
 
   const history = useHistory()
@@ -112,8 +125,11 @@ const Cast: FC = () => {
 
   //filterCheckItems: ['Canada', 'India', ...]
   //No check item -> show castInfo
-  const onClickUpdateButton = (filterCheckItems: string[]) => {
-    if (filterCheckItems.length === 0) {
+  const onClickUpdateButton = (filterCheckItems: CheckboxModel[]) => {
+    const filterCheckedItemsArray: CheckboxModel[] = filterCheckItems.filter(
+      (item: CheckboxModel) => item.checked
+    )
+    if (filterCheckedItemsArray.length === 0) {
       setIsFiltered(false)
       setCurrentCastInfo(castInfo)
       if (searchWord === '') return
@@ -121,7 +137,10 @@ const Cast: FC = () => {
       //Should re-search from castInfo array, after filtering.
       handleSearchFromSelectedCastInfo(searchWord, castInfo)
     } else {
-      const resultCastInfo = filterCastByCountry(filterCheckItems, castInfo)
+      const filterCountries = filterCheckedItemsArray.map(
+        (checkItem: CheckboxModel) => checkItem.value
+      )
+      const resultCastInfo = filterCastByCountry(filterCountries, castInfo)
       setFilteredCastInfo(resultCastInfo)
       setIsFiltered(true)
       setCurrentCastInfo(resultCastInfo)
@@ -151,7 +170,7 @@ const Cast: FC = () => {
           />
           <Filter
             category="Country"
-            values={countries} // TODO:
+            valueStatuses={countriesCheckBox}
             onClickUpdateButton={onClickUpdateButton}
             className={styles['castContainer--filterGroup-filter']}
           />
