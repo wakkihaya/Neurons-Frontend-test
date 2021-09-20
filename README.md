@@ -9,7 +9,7 @@ Demo GIF:
 
 ## Task board
 
-All tasks are managed a Github project.
+All tasks are managed in a Github project.
 
 See:
 https://github.com/wakkihaya/Neurons-Frontend-test/projects/1
@@ -45,7 +45,7 @@ The source directory has the architecture like this.
 
 - `hooks`
 
-  Managing APIs and helper functions.
+  Managing to call APIs and helper functions.
 
 - `models`
 
@@ -67,7 +67,7 @@ Please fill out this questionnaire and commit your answers to the repo
 
 > - What is your preferred ReactJS stack today for building a modern SaaS application? What libraries and frameworks would be incl. And why?
 
-I often use NextJS or React&Parcel for frontend development because it's easy and faster to build the initial environment. In particular, I would use NextJS with Vercel for a faster development. For backend, I use NestJS(or ExpressJS) with GraphQL (or RestAPI) because it can be written in TS/JS. Sometimes, I use Firebase as a BaaS because it has useful features, such as auth, DB, and functions, to develop speedy.
+I often use NextJS or React&Parcel for frontend development because it's easier and faster to build the initial environment. In particular, I would use NextJS with Vercel for a faster development. For backend, I use NestJS(or ExpressJS) with GraphQL (or RestAPI) because it can be written in TS/JS. Sometimes, I use Firebase as a BaaS because it has useful features, such as auth, DB, and functions, to develop speedy.
 
 > - How would you approach an application where multiple products and multiple teams working across the application?
 
