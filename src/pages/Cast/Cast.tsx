@@ -66,7 +66,13 @@ const Cast: FC = () => {
   const [isFiltered, setIsFiltered] = useState<boolean>(false)
 
   //castInfo: All original data. Stored because of use for search feature.
-  const { castInfo, searchCast, filterCastByCountry } = useCast(setLoading)
+  const {
+    castInfo,
+    searchCast,
+    filterCastByCountry,
+    storeFilteredCountriesChecksToLocalStorage,
+    getFilteredCountriesChecksFromLocalStorage,
+  } = useCast(setLoading)
 
   //currentCastInfo: used for rendering current cast.
   const [currentCastInfo, setCurrentCastInfo] = useState<
@@ -85,8 +91,14 @@ const Cast: FC = () => {
   //Wait for fetching data from api.
   useEffect(() => {
     setCurrentCastInfo(castInfo)
-    const newCountryCheckboxArray = extractCountries(castInfo) ?? []
-    setCountriesCheckBox(newCountryCheckboxArray)
+    const checkItemsFromLocalStorage = getFilteredCountriesChecksFromLocalStorage()
+    if (checkItemsFromLocalStorage) {
+      setCountriesCheckBox(checkItemsFromLocalStorage)
+      onClickUpdateButton(checkItemsFromLocalStorage)
+    } else {
+      const newCountryCheckboxArray = extractCountries(castInfo) ?? []
+      setCountriesCheckBox(newCountryCheckboxArray)
+    }
   }, [castInfo])
 
   const history = useHistory()
@@ -125,9 +137,12 @@ const Cast: FC = () => {
   //filterCheckItems: [{value: 'Canada', checked: true},{value: 'India',checked: falase}, ...]
   //No check item -> show castInfo
   const onClickUpdateButton = (filterCheckItems: CheckboxModel[]) => {
+    storeFilteredCountriesChecksToLocalStorage(filterCheckItems)
+
     const filterCheckedItemsArray: CheckboxModel[] = filterCheckItems.filter(
       (item: CheckboxModel) => item.checked
     )
+
     if (filterCheckedItemsArray.length === 0) {
       setIsFiltered(false)
       setCurrentCastInfo(castInfo)

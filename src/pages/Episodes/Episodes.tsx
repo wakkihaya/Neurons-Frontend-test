@@ -63,9 +63,13 @@ const Episodes: FC = () => {
   const [searchWord, setSearchWord] = useState<string>('')
   const [isFiltered, setIsFiltered] = useState<boolean>(false)
 
-  const { episodeInfo, searchEpisode, filterEpisodeByAirtime } = useEpisodes(
-    setLoading
-  )
+  const {
+    episodeInfo,
+    searchEpisode,
+    filterEpisodeByAirtime,
+    storeFilteredAirtimesChecksToLocalStorage,
+    getFilteredAirtimesChecksFromLocalStorage,
+  } = useEpisodes(setLoading)
 
   //currentEpisodeInfo: used for rendering current episodes.
   const [currentEpisodeInfo, setCurrentEpisodeInfo] = useState<
@@ -82,8 +86,14 @@ const Episodes: FC = () => {
   //Wait for fetching data from api.
   useEffect(() => {
     setCurrentEpisodeInfo(episodeInfo)
-    const newAirtimesCheckboxArray = extractAirtimes(episodeInfo) ?? []
-    setAirtimesCheckBox(newAirtimesCheckboxArray)
+    const checkItemsFromLocalStorage = getFilteredAirtimesChecksFromLocalStorage()
+    if (checkItemsFromLocalStorage) {
+      setAirtimesCheckBox(checkItemsFromLocalStorage)
+      onClickUpdateButton(checkItemsFromLocalStorage)
+    } else {
+      const newAirtimesCheckboxArray = extractAirtimes(episodeInfo) ?? []
+      setAirtimesCheckBox(newAirtimesCheckboxArray)
+    }
   }, [episodeInfo])
 
   const history = useHistory()
@@ -118,6 +128,7 @@ const Episodes: FC = () => {
   //filterCheckItems: [{value: '22:00', checked: true}, ...]
   //No check item -> show episodeInfo
   const onClickUpdateButton = (filterCheckItems: CheckboxModel[]) => {
+    storeFilteredAirtimesChecksToLocalStorage(filterCheckItems)
     const filterCheckedItemsArray: CheckboxModel[] = filterCheckItems.filter(
       (item: CheckboxModel) => item.checked
     )
@@ -136,7 +147,6 @@ const Episodes: FC = () => {
         filterAirtimes,
         episodeInfo
       )
-      console.log(resultEpisodeInfo)
       setFilteredEpisodeInfo(resultEpisodeInfo)
       setIsFiltered(true)
       setCurrentEpisodeInfo(resultEpisodeInfo)
