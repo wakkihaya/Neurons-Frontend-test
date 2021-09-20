@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { LoadingStatus } from '~models/LoadingStatus'
 import { EpisodeModel } from '~models/EpisodeModel'
+import { CheckboxModel } from '~models/CheckboxModel'
 
 // "<p>aaaaa aaaa </p>" -> "aaaaa aaaa"
 const removeUnneedPTag = (sentence: string) => {
@@ -77,5 +78,27 @@ export const useEpisodes = (
     return filteredArray
   }
 
-  return { episodeInfo, searchEpisode, filterEpisodeByAirtime }
+  const storeFilteredAirtimesChecksToLocalStorage = (
+    checkItems: CheckboxModel[]
+  ) => {
+    window.localStorage.setItem(
+      'filteredAirtimesChecks',
+      JSON.stringify(checkItems)
+    )
+  }
+
+  //Get items only {checked: true}
+  const getFilteredAirtimesChecksFromLocalStorage = () => {
+    const rawData = window.localStorage.getItem('filteredAirtimesChecks')
+    if (rawData === null) return
+    return JSON.parse(rawData) as CheckboxModel[]
+  }
+
+  return {
+    episodeInfo,
+    searchEpisode,
+    filterEpisodeByAirtime,
+    storeFilteredAirtimesChecksToLocalStorage,
+    getFilteredAirtimesChecksFromLocalStorage,
+  }
 }
