@@ -98,7 +98,6 @@ export const useCast = (
     )
   }
 
-  //Get items only {checked: true}
   const getFilteredCountriesChecksFromLocalStorage = () => {
     const rawData = window.localStorage.getItem('filteredContriesChecks')
     if (rawData === null) return

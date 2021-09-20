@@ -87,7 +87,6 @@ export const useEpisodes = (
     )
   }
 
-  //Get items only {checked: true}
   const getFilteredAirtimesChecksFromLocalStorage = () => {
     const rawData = window.localStorage.getItem('filteredAirtimesChecks')
     if (rawData === null) return
