@@ -14,6 +14,8 @@ All tasks are managed a Github project.
 See:
 https://github.com/wakkihaya/Neurons-Frontend-test/projects/1
 
+Improvement opportunities are listed in `Todo` column in the board.
+
 ## How to run
 
 1. `yarn` to install all dependencies
