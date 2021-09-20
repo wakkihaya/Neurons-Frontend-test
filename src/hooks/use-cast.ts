@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { LoadingStatus } from '~models/LoadingStatus'
 import { CastModel } from '~models/CastModel'
+import { CheckboxModel } from '~models/CheckboxModel'
 
 //Param: {birthday: '1982-03-10'} Return: string(e.g. '23')
 const calculateAge = (birthday: string) => {
@@ -88,9 +89,27 @@ export const useCast = (
     return filteredArray
   }
 
+  const storeFilteredCountriesChecksToLocalStorage = (
+    checkItems: CheckboxModel[]
+  ) => {
+    window.localStorage.setItem(
+      'filteredContriesChecks',
+      JSON.stringify(checkItems)
+    )
+  }
+
+  //Get items only {checked: true}
+  const getFilteredCountriesChecksFromLocalStorage = () => {
+    const rawData = window.localStorage.getItem('filteredContriesChecks')
+    if (rawData === null) return
+    return JSON.parse(rawData) as CheckboxModel[]
+  }
+
   return {
     castInfo,
     searchCast,
     filterCastByCountry,
+    storeFilteredCountriesChecksToLocalStorage,
+    getFilteredCountriesChecksFromLocalStorage,
   }
 }
