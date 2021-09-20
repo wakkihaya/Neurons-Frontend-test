@@ -1,131 +1,99 @@
 # Neurons Front-end Developer Coding Test
-Be sure to read **all** of this document carefully, and follow the guidelines within.
 
-## Context
+Specifications is in [SPECIFICATION.md](https://github.com/wakkihaya/Neurons-Frontend-test/blob/main/SPECIFICATION.md)
 
-Use React w/ TypeScript to implement the following mock-up. You will need to leverage an open API for Tv Show data to fill in the details and functionality as described below. You are only required to complete the desktop views, unless otherwise instructed.
+**You can access the app from [here](https://confident-hamilton-d23c79.netlify.app/).**
 
-Use this Figma file to see the Product UX/Design guidelines, you are welcome to improve the design experience as you see fit. 
+Demo GIF:
+![Demo GIF](./demo.gif)
 
-> [Source Figma file](https://www.figma.com/file/F6LUtupkwm21hrLLza4A5n/TV-Shows?node-id=0%3A1)
-![Pipedpiper-front-end-test-mockup](./piped_piper_app.png)
+## Task board
 
-Nb! Some screens are not designed but there are inspirations for implementation, part of the test is to see your approach to the more unknown. 
+All tasks are managed a Github project.
 
-## Requirements
+See:
+https://github.com/wakkihaya/Neurons-Frontend-test/projects/1
 
-### TV Show data API
+## How to run
 
-TV Show and Cast data 
-https://api.tvmaze.com/shows/143?embed=cast
+1. `yarn` to install all dependencies
+2. `yarn start` to run the application, accessed by http://localhost:1234
+3. `yarn storybook` to run storybook with components, accessed by http://localhost:6006
+4. `yarn test` to test components.
 
-Tv Show Episodes 
-https://api.tvmaze.com/shows/143/episodes?specials=1
+## Tech stacks
 
-Full API and usage documentation.
-https://www.tvmaze.com/api
+- Typescript
+- ReactJS
+- SCSS/SASS
+- Storybook
+- Percel ( ~~CREATE-REACT-APP~~)
+- Jest
+- Prettier
 
+- Netlify
 
+## Architecture
 
-### Page Structure
+The source directory has the architecture like this.
 
-```
-Main
-  - Navigation
-    - List the Cast members of the TV show 
-    - List the Episodes of the TV show 
-  - Section (Cast)
-    - Search bar 
-    - Filtering menu 
-      - List of cast members 
-  - Section (Episodes)
-    - Search bar 
-    - Filtering menu 
-      - List of episodes of the tv show
-Detail Cards(Cast)
-  - Profile image 
-  - Gender icon 
-  - Actor name, Age : Link to profile page 
-  - Country
-  - Character: Name in the show : Link to Character page 
-  - Birthday
-Detail Cards(Episodes)
-  - Profile image 
-  - Episode name : link til tvmaze 
-  - Episode description 
-  - Season nr / Episode nr 
-  - Air time
-```
+- `components`
 
-### Functionality
-- There are 2 tab of content one for Cast members and one for the Episodes 
-- Under each pages you can search for 
- - Cast : Name or Character name 
- - Episode: Name of the show or part of the description of the show. 
-- Under each pages you can filter the list of content  
-- Each page has options of filters e.g Country that may be dynamic created based on content, but not required.
-- Filtering options should be saved in the session as well as when I return to the application. _(optional)_ 
-- All data should come from Realtime API 
+  Common components applying Atomic design. Detail is in [this Wiki](https://github.com/wakkihaya/Neurons-Frontend-test/wiki/Atomic-Design-Patterns).
 
+- `hooks`
 
+  Managing APIs and helper functions.
 
-### Tech stack
+- `models`
 
-- TypeScript oriented (JavaScipt can be used, but we strongly prefer TypeScript)
-  - Use **React**
-  - We encorage you not to use any React boilerplate, such as Create React App, but you can definitely do it if it will save you some time.
-- Feel free to use a preprocessor, CSS-in-JS, or JSS tool. Additionally, you can use any existing UI library in the market such as Ant Design or Material UI. There are a few considerations that apply to this:
-    - try to design your components while having on mind that they will be consumed and mantained by other developers later on. 
-    - we want to see your understanding of CSS and styling practices
-    - we allow leveraging UI libraries to help you code faster, but we do expect some component design practice. 
+  Type declaration of common objects.
 
-### State management
-Feel free to use any state management strategy you'd like. While Redux is the most widely known approach to this, we do understand it requires some boilerplate. We'd like you to be pragmatic while thinking on maintainability of the code which doesn't necessarily translate into a specific library or tool.
+- `pages`
 
-### Bonus
+  Rendering Cast page and Episode page using `components`
 
-The following are nice-to-have features.
+- `styles`
 
-- Make the application accessible
-- Write clear **documentation** on how the app was designed and how to run the code
-- Implement useful testing
-- Provide components in [Storybook (https://storybook.js.org)
-- Write concise and clear commit messages
-- Provide an online demo of the application
-- Include subtle animations to focus attention
-- Created a Responsive version of the application
-- Describe improvement opportunities when you conclude
+  Common styles.
 
-## What We Care About
-Use any libraries that you would normally use if this were a real production App. Be prepared to justify those choices. 
-
-**Please note: we care more about how you approach the problem than the end result. Code cleanliness and design are more important than using the "right" library.**
-
-Here's what you should strive for:
-
-- Good use of current TypeScript, HTML, CSS, and performance best practices
-- Solid testing approach
-- Extensible code
-- Thorough explanation of decisions and tradeoffs
+---
 
 ## Questionnaire
-Please fill out this questionnaire and commit your answers to the repo 
-- What is your preferred ReactJS stack today for building a modern SaaS application? What libraries and frameworks would be incl. And why? 
-- How would you approach an application where multiple products and multiple teams working across the application? 
-- Design / UI Component system, How would you deal with that? Build one, use a framework (e.g Ant, Materiale UI etc. ) and why your approach? 
-- How to ensure good quality and high performance code? 
-- Why is testing important, how would you embed it in a team and with what tools? 
 
-## Q&A
+Please fill out this questionnaire and commit your answers to the repo
 
-> Where should I send back the result when I'm done?
+> - What is your preferred ReactJS stack today for building a modern SaaS application? What libraries and frameworks would be incl. And why?
 
-Fork this repo and share the repo with the hiring manager via email when you think you are done. There is no deadline for this task unless otherwise noted to you directly.
+I often use NextJS or React&Parcel for frontend development because it's easy and faster to build the initial environment. In particular, I would use NextJS with Vercel for a faster development. For backend, I use NestJS(or ExpressJS) with GraphQL (or RestAPI) because it can be written in TS/JS. Sometimes, I use Firebase as a BaaS because it has useful features, such as auth, DB, and functions, to develop speedy.
 
-> What if I have a question?
+> - How would you approach an application where multiple products and multiple teams working across the application?
 
-Please write the hiring manager an email with any questions you may have along the way. 
+An application should have documents with important contents below so that all teams understand how it works with less time.
 
+- How to run code
+- Tech stacks
+- The architecture including infrastructure, DB, frontend, and backend.
+- Design specifications such as color code.
 
--------------------------------------------------------------------------------------
-Credit to https://github.com/Superformula/frontend-test for the test inspiration 
+> - Design / UI Component system, How would you deal with that? Build one, use a framework (e.g Ant, Materiale UI, etc. ) and why your approach?
+
+First of all, UI design should be unified in the phase of designing on Figma, etc. So, teams centered by designers should pick the framework most developers are familiar with. In my case, I often use Material UI.
+
+In terms of UI component system, a company should have a unified design. So, especially in case that multiple teams or products get involved, we are recommended to have a monorepo to use the unified components. That's why atomic design, which I used for the project this time, is useful to manage components and do speedy development.
+
+> - How to ensure good quality and high performance code?
+
+To achieve good quality and high performance, I think we need to do at least four things.
+
+First thing is to make code commits and PRs clear so other developers in a team can understand what you did or what your strategies were. Specifically, commits should be conducted frequently as you do something divided by `fix`, `update`, `refactor`, `add`. PRs should be created frequently as well.
+
+Second thing is to refactor codes frequently. We can use Prettier and ESLint and so on for code formatter. We should write codes with the same format in a team.
+
+Third thing is to do code reviews between developers. Code reviews help us know great strategies as well as understand how the app works. Even if you're a beginner, by reviewing others' codes and being reviewed your codes, you will be able to write high performance code gradually.
+
+Last thing is to write readable codes. For example, as written in [The Art of Readable Code](oreilly.com/library/view/the-art-of/9781449318482/), we can write comment-out in codes for a difficult logic/function to understand.
+
+> - Why is testing important, how would you embed it in a team and with what tools?
+
+Testing is important because we can find out wrong points faster when we face problems. To achieve that, we should test for each function and component. Jest is known as a good testing library for JS/TS. Also, we can use Cypress, a framework for automating testing, and CI/CD such as Github Actions.
